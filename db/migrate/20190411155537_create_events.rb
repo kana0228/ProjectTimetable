@@ -12,7 +12,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-      add_foreign_key :events, :categories
+      add_foreign_key :events, :category
       add_foreign_key :events, :user
       #add_index :events, [:time_from, :time_to], unique: true
       add_index :events, :start, unique: true
