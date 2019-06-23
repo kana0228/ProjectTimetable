@@ -1,13 +1,13 @@
 class CreateEvents < ActiveRecord::Migration[5.2]
   def change
     create_table :events do |t|
-      t.references :user
+      t.references :user, foreign_key: true
       t.string :title
       t.boolean :disp_flg
       t.datetime :start#, unique = true
       t.datetime :end#, unique = true
       t.string :allDay
-      t.references :categoris
+      t.references :category, foreign_key: true
       t.boolean :useless_flag
 
       t.timestamps
