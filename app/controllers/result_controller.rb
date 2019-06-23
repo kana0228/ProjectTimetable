@@ -20,7 +20,7 @@ class ResultController < ApplicationController
     ## 集計開始日のdatetime型
     @datetime_span_from = @date_span_from.to_datetime
     ## 集計終了日のdatetime型。終了日のイベントを全て含めるため0:00から23:59に修正。
-    @datetime_span_to = @date_span_to.to_datetime.end_of_day-1
+    @datetime_span_to = @date_span_to.to_datetime
     ## 集計空白時間フラグ
     @empty_flg = params[:resultpr][:empty_flg]
     ## (開始日-終了日)（日） *24（時間）* 60（分）* 60（秒）＝開始日と終了日の差（秒）
