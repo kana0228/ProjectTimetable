@@ -38,7 +38,7 @@ class ResultController < ApplicationController
     ## 入力値の制御 narukiyo end
     
     @events = Event.where("user_id = ?", current_user).where("start >= ?", @datetime_span_from)
-                        .where("end <= ?", @datetime_span_to).order(start: "ASC")
+                        .where('"end" <= ?', @datetime_span_to).order(start: "ASC")
                           
     # イベント（無駄フラグ用）
     @events_useless = Event.where(["user_id = ? and Useless_flag = ?", current_user,true])                          
