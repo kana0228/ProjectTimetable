@@ -1,0 +1,45 @@
+<%= stylesheet_link_tag 'user', media: 'all', 'data-turbolinks-track' => true %>
+
+<div id="login">
+  <div>
+    <%= image_tag 'pjTimeTable.png'%>
+  </div>
+<%= form_for @user, url: login_create_path do |f| %>
+  <% flash.each do |message_type, message| %> 
+            <div class="alert alert-<%= message_type %>" role="alert">
+              <%= message.html_safe %>
+            </div>
+  <% end %>
+  
+<div id="idInput"class="input-group input-group-lg">
+  <div class="input-group-prepend">
+    <span class="input-group-text fontawesome-user" id="inputGroup-sizing-default">
+      <%#= f.label :user_name, "Your name" %>
+    </span>
+    <%= f.text_field :user_name, :id => "user", :class => "form-control", :placeholder => "your nickname" %>
+  </div>
+</div>
+
+<div class="input-group input-group-lg">
+  <div class="input-group-prepend">
+    <span class="input-group-text form-group fontawesome-lock" id="inputGroup-sizing-default">
+      <%#= f.label :password, "Password" %> 
+    </span>
+     <%= f.password_field :password, :class => "form-control", :placeholder => "Password" %> 
+  </div>
+</div>
+            <%= f.submit "Login", class: "btn btn-success btn-lg btn-block" %>
+            
+<% end %>
+
+        <!--<span class="fontawesome-user"></span>-->
+        <!--  <input type="text" id="user" placeholder="Username">-->
+       
+        <!--<span class="fontawesome-lock"></span>-->
+        <!--  <input type="password" id"pass" placeholder="Password">-->
+        
+        <!--<input type="button" value="Login" id="ref">-->
+        <%= link_to 'Sign up', signup_view_path, :class => "btn btn-info btn-lg btn-block" %>
+        <%= link_to 'Sign in with Twitter', '/auth/twitter', :class => "btn btn-primary btn-lg btn-block" %>
+      
+      </div>

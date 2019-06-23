@@ -1,0 +1,117 @@
+
+/*custom selector*/
+
+.main_article {
+  // border: 1px solid black;
+  padding: 0;
+
+
+}
+.section_div {
+  margin: 3 rem;
+  margin-top: 1rem;
+}
+
+.time {
+  margin-bottom: 0.2em;
+}
+
+.timetable_head {
+  background-color: skyblue;
+
+}
+
+.timetable_section {
+  padding: 20;
+}
+
+.hr-sect {
+	display: flex;
+	flex-basis: 100%;
+  align-items: center;
+	color: rgba(0, 0, 0, 0.35);
+	font-size: 12px;
+	margin: 2%;
+
+}
+.hr-sect::before,
+.hr-sect::after {
+	content: "";
+	flex-grow: 1;
+	background: rgba(0, 0, 0, 0.35);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 0px 10px;
+}
+
+.dateSection {
+
+  margin-left: 7%;
+  margin-bottom: 3%;
+}
+
+.left_line {
+  margin-left: 5%
+}
+.bottom_line {
+  margin-bottom: 5%
+}
+
+#newEventAndDate {
+    // border: 2px solid black;
+}
+.dateSection > span:nth-child(2) {
+  margin-left: 2%;
+}
+.dateSection > span:last-child {
+  margin-left: 2%;
+}
+
+.newEventSection_content > input {
+  margin-left: 6%;
+}
+.newEventSection_category  {
+  margin-left: 6%;
+
+}
+.newEventSection_category > select {
+  margin-left: 6%;
+
+}
+.newEventSection_uselessAndCheck > span:nth-child(2) {
+  margin-left: 8%;
+}
+.newEventSection_uselessAndCheck > input {
+  margin-left: 63%;
+}
+
+#Report {
+  // border: solid 2px black;
+  margin-top: 13%;
+}
+
+.reportUnit > input:nth-child(2){
+  margin-left: 4%;
+}
+
+.startDate > input {
+  margin-left: 7%;
+}
+
+.blank > input:nth-child(2) {
+  margin-left: 4%;
+}
+.blank > span:last-child {
+  margin-left: 25%;
+}
+
+.newEventSection_time > div.alert {
+  text-align: center;
+  padding: 5px !important;
+  margin-top:0.5rem !important;
+  margin-right: 2.5rem !important;
+  margin-bottom: 0rem !important;
+}
+
+/*custom selector*/

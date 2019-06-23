@@ -1,0 +1,27 @@
+
+<%= form_for @user, url: signup_create_path do |f| %>
+  <div id="signup">
+
+  <% flash.each do |message_type, message| %> 
+            <div class="alert alert-<%= message_type %>" role="alert">
+              <%= message.html_safe %>
+            </div>
+<% end %>
+  <h1 class="display-3">SIGN UP</h1>
+  <div class="form-group">
+    <%= f.label :user_name, "Your name" %>
+    <%= f.text_field :user_name, :class => "form-control", :placeholder => "your nickname" %>
+  </div>
+  <div class="form-group">
+      <%= f.label :password, "Password" %> 
+      <%= f.password_field :password, :class => "form-control", :placeholder => "Password" %> 
+   </div>
+  <div class="form-group">
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Password Confirmation" %>
+
+  </div>
+  <%= f.submit "Create my account", class: "btn btn-primary btn-lg btn-block" %>
+  </div>
+<% end %>
+

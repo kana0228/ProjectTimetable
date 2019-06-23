@@ -1,0 +1,114 @@
+<main>
+      <div class="page-loader">
+        <div class="loader">Loading...</div>
+      </div>
+      <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="index.html">Result</a>
+          </div>
+          <div class="collapse navbar-collapse" id="custom-collapse">
+           
+          </div>
+        </div>
+      </nav>
+      <div class="main">
+        <section class="module bg-dark-30 about-page-header" data-background="assets/images/about_bg.jpg">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                <h1 class="module-title font-alt mb-0">Progress Bars</h1>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="module">
+          <div class="container">
+            <div class=“sticky”>
+                <div><a href="#category_title">カテゴリー別へ</a></div>
+                <div><a href="#period_title">期間別時間へ</a></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+                <h3 class="font-alt mb-0" id="category_title">カテゴリー別</h3>
+                <hr class="divider-w mt-10 mb-20">
+                
+                <!-- 仮にここで計算実施 ★グラフへの反映の仕方がわかりません！　-->
+                <!-- カテゴリー２ -->
+                    <%# sum1 = 0 %>
+                    <%# sum2 = 0 %>
+                    <!-- 指定された日付の範囲 -->
+                    <%# span= (@datetime_span_to-@datetime_span_from) *24*60 %>
+                    <%# @one_events.each do |event| %>
+                      <%# sum1 += (event.end - event.start)/60/span *100 %>
+                    <%# end %>
+                    <!--カテゴリー１の指定日時範囲の割合<%#= sum1 %>-->
+                    <%# @two_events.each do |event| %>
+                      <%# sum2 += (event.end - event.start)/60/span *100 %>
+                    <%# end %>
+                    <!-- カテゴリー２の指定日時範囲の割合<#%= sum2 %> -->
+
+<!-- カテゴリー名 -->
+        <%# Category.all.each do |category| %>
+              <!--  <h6 class="font-alt"><span class="icon-strategy"></span> -->
+                  <!-- カテゴリー名 -->
+                    
+                    <%#= category.category_val%>
+                                    
+                <!-- </h6>-->
+                <!-- <div class="progress">
+                  <div class="progress-bar pb-dark" aria-valuenow="60" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div> -->
+                <%# end %>
+<!-- カテゴリー名 -->
+<% Category.all.each do |category| %>
+                <h5 class="font-alt"><span class="icon-strategy"></span>
+                  <!-- カテゴリー名 -->
+                    
+                    <%= category.category_val %><br>
+                                    
+                </h5>
+                <div class="progress">
+                  <div class="progress-bar pb-dark" aria-valuenow="<%= @categoriesSum[category.id] %>" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                  <!--categoryの個数ほど繰り返します。category_valを使って値を取り出します。　-->
+                </div>
+<% end %>
+                <h5 class="font-alt"><span class="icon-strategy"></span>無駄な時間
+                  <!-- カテゴリー名 -->
+                </h5>
+                <div class="progress">
+                  <div class="progress-bar pb-dark" aria-valuenow="<%= @sum_useless %>" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+
+                <h3 class="font-alt mb-0" id="period_title">期間別時間</h4>
+                <hr class="divider-w mt-10 mb-20">
+
+<% @eventDate.each {|key, value| %>
+               
+                <h5 class="font-alt"><span class="icon-tools-2"></span> <%= key %>
+                </h5>
+                <div class="progress">
+                  <div class="progress-bar" aria-valuenow="<%= value %>" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div>
+ <% } %>                
+              </div>
+            </div>
+          </div>
+          <%= link_to 'Back to the Main page', main_page_show_path, :class => "btn btn-outline-primary btn-lg btn-block" %>
+        </section>
+        <div class="module-small bg-dark">
+          <div class="container">
+            <div class="row">
+            </div>
+          </div>
+        </div>
+        <hr class="divider-d">
+        <footer class="footer bg-dark">
+          <div class="container">
+            <div class="row">
+            </div>
+          </div>
+        </footer>
+      </div>
+      <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
+    </main>

@@ -1,0 +1,54 @@
+<div id="newEventAndDateModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+        <!-- newEventAndDateModal Start -->
+        
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                
+              <div class="modal-header">
+                <div class="col-xs-6">
+                  <span><h2 class="modal-title" id="eventModalLabel">イベントの入力</h2></span>
+                </div>
+                <div class="col-xs-6">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <h4><span aria-hidden="true">&times;</span></h4>
+                </button>
+                </div>
+              </div><!-- modal-header end -->
+              
+              <div class="modal-body">
+                <%= form_for @event, :url => {:action => :create } do |f| %> <!-- form_for start from modal-body to modal-footer -->
+                <div class="dateSection">
+                  <span><%= date_field_tag :date  %></span>
+                </div>
+                <div class="newEventSection_time left_line bottom_line">
+                  <span><%= f.label :start, "開始時間" %></span>
+                  <span><%= f.time_field :start %></span>
+                  <span>〜</span>
+                  <!--<span>終了時間</span>-->
+                  <span><%= f.label :end, "終了時間" %></span>
+                  <span><%= f.time_field :end %></span>
+                </div>
+                <div class="newEventSection_content left_line bottom_line">
+                  <span><%= f.label :title, "予定を入力してください" %></span>
+                  <%= f.text_field :title, :value => @event.title %>
+                 
+                </div>
+                <div class="newEventSection_category bottom_line">
+                  <span><%= f.label :category, "カテゴリーを入力してください:" %></span>
+                  <%= f.select :category_id, Category.all.map{|o| [o.category_val, o.id]} %>
+                </div>
+                <div class="newEventSection_uselessAndCheck left_line bottom_line">
+                  <span><%= f.label :useless_flag, "無駄な時間でしたか？チェックしてください。" %></span>
+                  <span><%= f.check_box :useless_flag %></span>
+                </div>
+                </div><!-- modal-body end -->
+                
+                <div class="modal-footer">
+                  <%= f.button "Cancel", :class => "btn btn-secondary", "data-dismiss": "modal" %>
+                  <%= f.submit "Save", :class => "btn btn-primary" %>
+                </div><!-- modal-footer end -->
+                
+              <% end %>
+            </div><!-- modal-content end -->
+          </div> <!-- modal-dialog end -->
+</div>

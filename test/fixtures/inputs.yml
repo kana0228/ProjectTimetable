@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time_from: 2019-04-11
+  time_to: 2019-04-11
+  content: MyText
+  category: 
+  useless_flag: false
+
+two:
+  time_from: 2019-04-11
+  time_to: 2019-04-11
+  content: MyText
+  category: 
+  useless_flag: false

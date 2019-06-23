@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_span_from: 2019-04-21
+  date_span_to: 2019-04-21
+  empty_flg: false
+
+two:
+  date_span_from: 2019-04-21
+  date_span_to: 2019-04-21
+  empty_flg: false
