@@ -5,6 +5,6 @@ class CreateTests < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_foreign_key :tests,:categories
+    #add_foreign_key :tests,:categories
   end
 end
