@@ -7,7 +7,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.datetime :start#, unique = true
       t.datetime :end#, unique = true
       t.string :allDay
-      t.references :category
+      t.references :categoris
       t.boolean :useless_flag
 
       t.timestamps
