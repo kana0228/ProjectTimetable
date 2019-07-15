@@ -2465,7 +2465,7 @@ Google map
   margin-bottom: 30px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .comment .comment {
     margin-left: 75px;
   }
@@ -2701,7 +2701,7 @@ Google map
 /*--------------------------------------------------------------
 	Responsive Styles - Media Queries
 --------------------------------------------------------------*/
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .navbar-transparent {
     background: transparent;
     padding-bottom: 15px;
@@ -2782,7 +2782,7 @@ Google map
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   /* Navbar */
   .navbar-custom .navbar-nav {
     letter-spacing: 3px;
@@ -2977,17 +2977,10 @@ Google map
 }
 
 .dateSection {
-
   margin-left: 17%;
   margin-bottom: 3%;
 }
 
-.left_line {
-  margin-left: 5%
-}
-.bottom_line {
-  margin-bottom: 5%
-}
 
 #newEventAndDate {
     /*border: 2px solid black;*/
@@ -3019,7 +3012,8 @@ Google map
 
 #Report {
   /*border: solid 2px black;*/
-  margin-top: 13%;
+  /*margin-top: 13%;*/
+  margin: 0 auto;
 }
 
 .reportUnit > input:nth-child(2){
@@ -3043,7 +3037,24 @@ Google map
 
 .badge {
   margin-bottom: 1rem;
-  background-color: #1da91c;
+  /*background-color: #1da91c;*/
+}
+
+.badge-success {
+   background-color: #1da91c; 
+}
+
+.badge-dark {
+    color: #fff;
+    background-color: #343a40;
+    margin-bottom: 0px !important;
+}
+.font-left {
+    margin-left: 2rem;
+}
+
+.modalInputArea {
+  margin-left: 6.5rem;
 }
 
 /*custom selector*/

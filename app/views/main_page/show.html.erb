@@ -7,12 +7,7 @@
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="index.html">Main Page</a>
-          
         </div>
 
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -20,11 +15,8 @@
             <li class="nav-item">
               <%= link_to "Logout", logout_path, :method => "DELETE", :class => "navbar-brand" %>
             </li>
-
         </ul>
     </div>
-        
-
       </div>
       <!-- nav container end -->
     </nav>
@@ -51,167 +43,60 @@
             <span class="badge badge-success"><%= "#{session[:nickname]}さん、こんにちは" %></span>
           <% end %>
           
-<!-- narukiyo add start -->
-          <!-- パラメータが取得できているか仮確認 --><!-- ★取得できてない-->
-          <span class="badge badge-success"><%= @event_sonzai_flg%></span>
-          
-          <!-- パラメータをもとに取得したイベントが取得できていることを仮確認） -->
-          <!-- パラメータの取得が不成功のため、こちらもうまくいってない★-->
-         
-<!-- narukiyo add end -->
-          
         </div>
       </article>
       <article class="">
-        <div class="col-xs-6 main_article">
-          <div class="timetable_head">Time table</div>
-          <div id='calendar'>
-
-          </div>
-        </div>
-      </article>
-      <!-- section end-->
-      <div class="col-xs-1"></div>
-      <!-- section start-->
-      <article class="">
-        <div id= "calendar"></div>
-         <%= render 'eventModal' %> <!-- narukiyo delete -->
-        <!-- _eventModal.html.erbを読み込む。　_eventModal.html.erbを確認してください！ -->
-
-        <div class="col-xs-5 main_article">
-          <!-- newEventAndDate Form Start -->
-          <div id="newEventAndDate">
-<%= form_for @event,:url => {:action => :create } do |f| %>
-<!-- form_tag result_show_path, :method => "GET" do -->
-
-          <!--<form class="newEventAndDate" action="index.html" method="post">-->
-          <div class="dateHeader hr-sect"> Date</div>
-          <div class="dateSection">
-            <!--<span><%#= radio_button_tag(:expected, "expected") %> 予定</span>-->
-            <!--<span><input type="radio" name="expected" value="expected">予定 </span>-->
-            <!--<span><%#= radio_button_tag(:result, "result") %>結果</span>-->
-            <!--<span> <input type="radio" name="result" value="result">結果 </span>-->
-            <span><%= date_field_tag :date  %></span>
-            <!--<span> <input type="date" name="date" value="date"> </span>-->
-          </div>
-          <div class="newEventHeader hr-sect"> New date</div>
-          <div class="newEventSection_time left_line bottom_line">
-            <span><%= f.label :start, "開始時間" %></span>
-            
-            <!--<span><input type="time" name="startTime"></span> -->
-            <!--<span><input type="time" name="event[time_from]" id="event_time_form"></span>-->
-            <span><%= f.time_field :start %></span>
-            
-            <span>〜</span>
-            <!--<span>終了時間</span>-->
-            <span><%= f.label :end, "終了時間" %></span>
-            
-            <!--<span><input type="time" name="endTime"></span>-->
-            <span><%= f.time_field :end %></span>
-            
-            <!-- エラーメッセージnarukiyo start-->
-  <% flash.each do |message_type, message| %> <!-- dahun https://getbootstrap.com/docs/4.3/components/alerts/ -->
-            <div class="alert alert-<%= message_type %>" role="alert">
-              <%= message %>
-            </div>
-  <% end %> <!-- dahun https://pg-happy.jp/rails-flash-message.html -->
-            <!--<span><%#= flash[:error1]%></span>-->
-            <!-- エラーメッセージnarukiyo end-->
-          </div>
-          <div class="newEventSection_content left_line bottom_line">
-            <span><%= f.label :title, "内容" %></span>
-<!-- narukiyo add start 0616 -->            
-            <%if @event_sonzai_flg == "1" %>
-                    <% @event_cont.each do |event| %>
-                    <%= f.text_field :title, value:event.title %>
-                    <% end %>               
-            <% else %>
-                    <%= f.text_field :title %>
-            <% end %>
-<!-- narukiyo add end 0616 -->            
-            <!--<input type="text" name="event[content]" id="event_content">-->
-
-          </div>
-          <div class="newEventSection_category bottom_line">
-            <span><%= f.label :category, "カテゴリー" %></span>
-            
-            
-            
-            <!--  <option value="1">Game</option>-->
-            <!--  <option value="2">TV</option>-->
-            <!--  <option value="3">Sports</option>-->
-            <!--  <option value="4">Study</option>-->
-            
-            <%= f.select :category_id, Category.all.map{|o| [o.category_val, o.id]} %>
-            <!--<select class="newEventSelect" name="selectNewEvent">-->
-            <!--<select class="newEventSelect" name="event[category]" id ="event_category">-->
-            <%# for option in @category do %>
-              <!--<option value="<%#= option.id %>"> <%#= option.category_val %> </option>-->
-            <%# end %>  
-            <!--</select>-->
-          </div>
-          <div class="newEventSection_uselessAndCheck left_line bottom_line">
-            <span><%= f.label :useless_flag, "無駄" %></span>
-            <!--<span><input type="checkbox" name="event[useless_flg]" id="event_useless_flg" value="true"></span>-->
-            <span><%= f.check_box :useless_flag %></span>
-            <!--<input type="submit" name=newEventAndDateSubmit value="OK">-->
-            <%= f.submit "OK", :class => "btn btn-primary btn-lg" %>
-          </div>
-<% end %>
-        <!--</form>-->
-        </div>
-      <!-- newEventAndDate Form End -->
-
-      <div class=""></div>
-
+        
       <div id="Report">
         <!--<form class="" action="index.html" method="post">-->
         
  <%#= form_tag result_show_path, :method => "GET" do %>
  <%= form_for @resultpr, url:result_show_path do |f| %>
         <div class="report hr-sect"> Report </div>
-        <div class="reportUnit left_line bottom_line">
-          <!--<span>集計単位</span>-->
-          
-          <%#= radio_button_tag(:unit, "day") %>
-          <%#= label_tag(:unit_day, "day") %>
-          <%#= radio_button_tag(:unit, "week") %> <!--week-->
-          <%#= radio_button_tag(:unit, "month") %> <!--month-->
-          <%#= radio_button_tag(:unit, "year") %> <!--year-->
-          <!--<input type="radio" name="unit" value="week"> week-->
-          <!--<input type="radio" name="unit" value="month"> month-->
-          <!--<input type="radio" name="unit" value="year"> year-->
-        </div>
+ <% flash.each do |message_type, message| %> <!-- dahun https://getbootstrap.com/docs/4.3/components/alerts/ -->
+          <div class="alert alert-<%= message_type %>" role="alert">
+            <%= message %>
+          </div>
+  <% end %>
         <div class="dateSpan left_line bottom_line">
-          <span><%= f.label :date_span_from, "開始日" %></span>
+        <!-- エラーメッセージnarukiyo start-->
+
+        <!-- エラーメッセージnarukiyo end-->
+          <span><%= f.label :date_span_from, "開始日", :class => "badge badge-dark" %></span>
           <!--<span>開始日</span>-->
-          <span><%= f.date_field :date_span_from %></span>
-          <!=-<input type="date" name="date">-->
+          <span><%= f.date_field :date_span_from, :class => "dateField" %></span>
+          <!--<input type="date" name="date">-->
           <span>　　</span>
           <span>～</span>
           <span>　　</span>
-          <span><%= f.label :date_span_to, "終了日" %></span>
+          <span><%= f.label :date_span_to, "終了日", :class => "badge badge-dark" %></span>
           <!--<span>終了日</span>-->
-          <span><%= f.date_field :date_span_to %></span>
+          <span><%= f.date_field :date_span_to, :class => "dateField" %></span>
           <!--<input type="date" name="date">-->
-        <!-- エラーメッセージnarukiyo start-->
-        </div>
-        <div class="dateSpan left_line bottom_line">
-          <span><%= flash[:error]%></span>
-        </div>
-        <!-- エラーメッセージnarukiyo end-->
-        <div class="blank left_line bottom_line">
-          <span>空白時間</span>
-          <input type="radio" name="blank" value="true">いれる
-          <input type="radio" name="blank" value="false">いれない
-          <!--<span><input id="ref2" type="submit" name="ReportSubmit" value="Result"></span>-->
-          <span><%= submit_tag "Result", :name => "ReportSubmit" %></span>
-        </div>
+      
+          <span><%= submit_tag "Result", :name => "ReportSubmit", :class => "btn btn-secondary" %></span>
 <!--</form>-->
 <% end %>
-      </div>
-
         </div>
+
+      </div>
+          <div class="main_article">
+            <div class="timetable_head"> <h3>Time table</h3></div>
+            <div id='calendar'>
+  
+            </div>
+          </div>
+      </article>
+      <!-- section end-->
+      <div class="col-xs-1"></div>
+      <!-- section start-->
+      <article class="">
+        <div id= "calendar"></div>
+         <%= render 'eventModal' %>
+         <!-- _eventModal.html.erbを読み込む。　_eventModal.html.erbを確認してください！ -->
+  
+      <div class=""></div>
+
 
       </article>
     </div>

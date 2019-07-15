@@ -1,5 +1,17 @@
 class MainPageController < ApplicationController
   
+  def delete
+    logger.debug("!!!!!! Delete Data !!!!")
+    logger.debug(params[:id])
+    @event = Event.find_by(id: params[:id])
+    @event.destroy
+      respond_to do |format|
+        format.html { redirect_to '/main_page/show', notice: 'Event was successfully deleted.' }
+        format.js { @status = "deleted" }
+      end
+  end
+  
+  
   def edit
      @event = Event.find_by(id: params[:id])
      logger.debug("Edit Debug event !!!!!!!!!!1")
@@ -7,6 +19,7 @@ class MainPageController < ApplicationController
   end
   
   def update
+    @event = Event.find(params[:event][:id])
     time_s = params[:date] + " "+ params[:event][:start] #concat date and time_from
     time_e = params[:date] + " " + params[:event][:end] #concat date and time_to
     time_s.to_datetime #convert String to Datetime
@@ -14,53 +27,95 @@ class MainPageController < ApplicationController
     @event.update(start:time_s, end:time_e, title:params[:event][:title],
       category_id:params[:event][:category_id],useless_flag:params[:event][:useless_flag], 
       user_id: current_user.id)
-      redirect_to main_page_show_path
+      #return redirect_to main_page_show_path
+      respond_to do |format|
+        format.html { redirect_to main_page_show, notice: 'User was successfully created.' }
+        format.js { @status = "created" }
+      end      
   end
 
   def show
     #@category = Category.all
     @resultpr = Resultpr.new
-    @event = Event.new 
-    logger.debug(params[:event_sonzai_flg])
-    if(params[:event_sonzai_flg] == "1") 
-      @event = Event.find_by(id: params[:id])
+    if(params[:event_sonzai_flg] == "1") then
+      @event = Event.find(params[:id])
+      @event.start = @event.start.to_s
+      @event.end = @event.end.to_s
        render :json => @event
+    else
+      @event = Event.new 
     end
     logger.debug("Debug event_cont !!!!!!!!!!1")
     logger.debug(@event.inspect)
   end
     
-    
-
-#narukiyo add start      
-    #カレンダーからのパラメータ
-    #イベント存在フラグ
-
-    #イベントが存在する場合（クリックしたのがイベント登録あり）
-    #対象のイベントのデータを取得
-
-#narukiyo add end
-  
-  
-  
   def create
+    
     logger.debug(current_user)
     time_s = params[:date] + " "+ params[:event][:start] #concat date and time_from
     time_e = params[:date] + " " + params[:event][:end] #concat date and time_to
     time_s.to_datetime #convert String to Datetime
     time_e.to_datetime #convert String to Datetime
     
-    ## 入力値制御 narukiyo start
-    ## 日付の理論制御 narukiyo 
-    if time_s > time_e
-      #flash[:error1] = '終了時間には開始時間以降の値を入力してください。'
-      flash[:danger] = '終了時間には開始時間以降の値を入力してください。'
-      redirect_to main_page_show_path   
-      
+    ## 入力値制御
+    if params[:date].blank?
+      # 日時必須入力
+      logger.debug("falsh処理！！！！！！！！！")
+        respond_to do |format|
+          format.js { flash[:danger] = "日時は必須入力です。" ,
+            @status = "fail"
+          }
+        end       
+    elsif params[:event][:start].blank?
+      # 開始時刻必須入力
+      logger.debug("falsh処理！！！！！！！！！")
+        respond_to do |format|
+          format.js { flash[:danger] = "開始時間は必須入力です。" ,
+            @status = "fail"
+          }
+        end    
+    elsif params[:event][:end].blank?
+      # 終了時刻必須入力
+      logger.debug("falsh処理！！！！！！！！！")
+        respond_to do |format|
+          format.js { flash[:danger] = "終了時間は必須入力です。" ,
+            @status = "fail"
+          }
+        end   
+    elsif params[:event][:title].blank?
+      # 予定内容必須入力
+      logger.debug("falsh処理！！！！！！！！！")
+        respond_to do |format|
+          format.js { flash[:danger] = "予定内容は必須入力です。" ,
+            @status = "fail"
+          }
+        end   
+    elsif params[:event][:category_id].blank?
+      # カテゴリー必須入力
+      logger.debug("falsh処理！！！！！！！！！")
+        respond_to do |format|
+          format.js { flash[:danger] = "カテゴリーは必須入力です。" ,
+            @status = "fail"
+          }
+        end           
+    elsif time_s > time_e
+      logger.debug("falsh処理！！！！！！！！！")
+        respond_to do |format|
+          format.js { flash[:danger] = "終了時間には開始時間以降の値を入力してください。" ,
+            @status = "fail"
+          }
+        end
+      # redirect_to message_index_path   
       
     else
       ## 入力値にエラーがない場合
-      ## 入力値の制御　narukiyo end
+      
+      ## 更新処理
+      if params[:event][:id].blank? != true
+        return self.update
+      end      
+      
+      ## 登録処理
       logger.debug("現在のユーザー確認！！！！！！！！！")
       logger.debug(current_user.inspect)
       event = Event.new(start:time_s, end:time_e, title:params[:event][:title],
@@ -68,7 +123,13 @@ class MainPageController < ApplicationController
       user_id: current_user.id )
       
       logger.debug(event.inspect)
-      
+      event.save #save the object data to DB　=> Create id and created_time, updated_time automatically.
+      # redirect_to main_page_show_path
+      respond_to do |format|
+        format.html { redirect_to main_page_show, notice: 'User was successfully created.' }
+        format.js { @status = "created" }
+        
+      end
       #event = Event.new #Create Event Object
       #logger.debug(event) 
       #event.time_from = time_f  #insert datetime
@@ -78,38 +139,14 @@ class MainPageController < ApplicationController
       #event.category_id = params[:event][:category_id]
       #event.useless_flag = params[:event][:useless_flag]
       #logger.debug(event.inspect) #how to debug-->
-      event.save #save the object data to DB　=> Create id and created_time, updated_time automatically.
-      redirect_to main_page_show_path
+      
     end
   end
 
-#narukiyo add start  実験で作っただけこれはきにしないで現状どこからも使用されてない
-  def reshow
-    #カレンダーからのパラメータ
-    #イベント存在フラグ
-    @event_sonzai_flg = params[:event_sonzai_flg]
-    logger.debug("Debug !!!!!!!!!!1")
-    logger.debug(@event_sonzai_flg.inspect)
-    logger.debug(params[:id])
-    #クリックしたイベントのID
-    @event_id = params[:id] 
-    
-    #イベントが存在する場合（クリックしたのがイベント登録あり）
-    #対象のイベントのデータを取得
-    if(@event_sonzai_flg == "1") 
-      @event_cont = Event.where(["id = ?", params[:id]])
-      logger.debug("Debug event_cont !!!!!!!!!!1")
-      logger.debug(@event_cont.inspect)
-    end
-    redirect_to main_page_show_path 
-  end
-#narukiyo add end  　実験で作っただけこれはきにしないで現状どこからも使用されてない
-
-  ##修正必要。user_idでデータを探してそのデータだけ表示できるようにすれば。？★→ユーザIDベタ書き。取得してほしい。
-  ### ダフン：application_controllerにていくつかのメソッドを実装しています。
+  #DBの値をfulcalendarに表示する処理
   def events
-    
     @event = Event.where(user: current_user)
+    logger.debug("!!!! Fullcalendar 処理をしています。 !!!!!")
     respond_to do |format|
       format.json{
         render json:

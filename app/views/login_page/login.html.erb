@@ -5,11 +5,11 @@
     <%= image_tag 'pjTimeTable.png'%>
   </div>
 <%= form_for @user, url: login_create_path do |f| %>
-  <% flash.each do |message_type, message| %> 
-            <div class="alert alert-<%= message_type %>" role="alert">
-              <%= message.html_safe %>
-            </div>
-  <% end %>
+  <%# flash.each do |message_type, message| %> 
+            <!--<div class="alert alert-<%#= message_type %>" role="alert">
+              <%#= message.html_safe %>
+            </div>-->
+  <%# end %>
   
 <div id="idInput"class="input-group input-group-lg">
   <div class="input-group-prepend">
