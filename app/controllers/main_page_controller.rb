@@ -11,7 +11,15 @@ class MainPageController < ApplicationController
       end
   end
   
-  
+  def cancel
+    #render action: :show #★レンダリングにするとmain_page_showの54行目でエラーになってしまう
+    #createと同様に記載すれば同様に動くかと思ったけど再表示になってしまう。これなら普通に_eventModalでredirect_toしたら良いかも
+    #エラーメッセージがモーダルに出力されたままcancelボタンを押すと、メインページのエラーが表示されてしまう。
+      respond_to do |format|
+        format.html { redirect_to '/main_page/show'}
+        format.js { @status = "canceled" }
+      end    
+  end
   def edit
      @event = Event.find_by(id: params[:id])
      logger.debug("Edit Debug event !!!!!!!!!!1")
@@ -123,13 +131,21 @@ class MainPageController < ApplicationController
       user_id: current_user.id )
       
       logger.debug(event.inspect)
-      event.save #save the object data to DB　=> Create id and created_time, updated_time automatically.
-      # redirect_to main_page_show_path
-      respond_to do |format|
-        format.html { redirect_to main_page_show, notice: 'User was successfully created.' }
-        format.js { @status = "created" }
-        
-      end
+      begin
+        if event.save! #save the object data to DB　=> Create id and created_time, updated_time automatically.
+        # redirect_to main_page_show_path
+          respond_to do |format|
+            format.html { redirect_to main_page_show, notice: 'User was successfully created.' }
+            format.js { @status = "created" }
+          end
+        end
+        rescue Exception => e
+          respond_to do |format|
+            format.html { redirect_to main_page_show, notice: "User wasn't successfully created." }
+            format.js { flash[:danger] = "この時間帯には入力できません。" ,
+            @status = "fail" }
+          end
+        end
       #event = Event.new #Create Event Object
       #logger.debug(event) 
       #event.time_from = time_f  #insert datetime
@@ -139,7 +155,6 @@ class MainPageController < ApplicationController
       #event.category_id = params[:event][:category_id]
       #event.useless_flag = params[:event][:useless_flag]
       #logger.debug(event.inspect) #how to debug-->
-      
     end
   end
 

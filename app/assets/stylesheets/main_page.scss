@@ -57,6 +57,8 @@
 .left_line {
   margin-left: 30%;
   align-items: center;
+      overflow: auto;
+    // margin: auto;
 }
 // @media (max-width: 480px) {
 //   .left_line {

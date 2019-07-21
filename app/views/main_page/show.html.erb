@@ -53,6 +53,7 @@
  <%#= form_tag result_show_path, :method => "GET" do %>
  <%= form_for @resultpr, url:result_show_path do |f| %>
         <div class="report hr-sect"> Report </div>
+<!--<div id="flash_messages"></div>        -->
  <% flash.each do |message_type, message| %> <!-- dahun https://getbootstrap.com/docs/4.3/components/alerts/ -->
           <div class="alert alert-<%= message_type %>" role="alert">
             <%= message %>
