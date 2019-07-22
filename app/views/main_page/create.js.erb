@@ -1,15 +1,20 @@
 
 
 <% if @status == 'fail' %>
+    <!-- エラーが発生した場合、flashでエラーメッセージ表示 -->
+    
     <% flash.each do |type, message| %>
       $("#flash_messages").html("<div class='alert alert-<%= type %>' role='alert'> <%= message[0] %><button type='button' class='close' data-dismiss='alert'>&times;</button> </div>")
     <% end %>
-<%  elsif @status == 'created' || @status == 'deleted' || @status == 'canceled' %>
+<%  elsif @status == 'created' || @status == 'deleted' %>
+    <!-- エラーが発生していない場合、エラーメッセージを表示しない -->
+
     $("#newEventAndDateModal").modal("hide");
     var event = $.ajax("/events.json");
     console.log(event);
    $("#calendar").fullCalendar("renderEvents", event, true );
    $("#calendar").fullCalendar("refetchEvents");
+   
 <% end %>
 
 

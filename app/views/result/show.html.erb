@@ -6,7 +6,16 @@
         <div class="container">
           <div class="navbar-header">
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="index.html">Result</a>
-          </div>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <%= link_to "Back to the Main page", main_page_show_path, :class => "navbar-brand" %>
+            </div>                
+                
+              </li>
+          </ul>
+        </div>          
           <div class="collapse navbar-collapse" id="custom-collapse">
            
           </div>
@@ -25,44 +34,29 @@
         <section class="module">
           <div class="container">
             <div class=“sticky”>
-                <div><a href="#category_title">カテゴリー別へ</a></div>
-                <div><a href="#useless_title">無駄な時間へ</a></div>
-                <div><a href="#period_title">期間別時間へ</a></div>
+                <div><a href="#useless_title">無駄な時間</a></div>
+                <div><a href="#category_title">カテゴリー別割合</a></div>
+                <div><a href="#period_title">カテゴリー別推移</a></div>
             </div>
             <div id="category_title" />
             <div class="row">
+              
               <div class="col-sm-8 col-sm-offset-2">
-                <h3 class="font-alt mb-0">カテゴリー別</h3>
+                <!-- 無駄な時間を表示する。-->
+                <h3 class="font-alt mb-0" id="useless_title">無駄な時間</h4>
                 <hr class="divider-w mt-10 mb-20">
                 
-                <!-- カテゴリー２ -->
-                    <%# sum1 = 0 %>
-                    <%# sum2 = 0 %>
-                    <!-- 指定された日付の範囲 -->
-                    <%# span= (@datetime_span_to-@datetime_span_from) *24*60 %>
-                    <%# @one_events.each do |event| %>
-                      <%# sum1 += (event.end - event.start)/60/span *100 %>
-                    <%# end %>
-                    <!--カテゴリー１の指定日時範囲の割合<%#= sum1 %>-->
-                    <%# @two_events.each do |event| %>
-                      <%# sum2 += (event.end - event.start)/60/span *100 %>
-                    <%# end %>
-                    <!-- カテゴリー２の指定日時範囲の割合<#%= sum2 %> -->
-
-<!-- カテゴリー名 -->
-        <%# Category.all.each do |category| %>
-              <!--  <h6 class="font-alt"><span class="icon-strategy"></span> -->
-                  <!-- カテゴリー名 -->
-                    
-                    <%#= category.category_val%>
-                                    
-                <!-- </h6>-->
-                <!-- <div class="progress">
-                  <div class="progress-bar pb-dark" aria-valuenow="60" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
-                </div> -->
-                <%# end %>
-<!-- カテゴリー名 -->
-<% Category.all.each do |category| %>
+                <div class="progress">
+                  <div class="progress-bar pb-dark" aria-valuenow="<%= @sum_useless %>" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                </div> 
+                <!-- 無駄な時間を表示する。-->                 
+                
+                
+                <!-- カテゴリー別割合を表示する。-->
+                <h3 class="font-alt mb-0">カテゴリー別割合</h3>
+                <hr class="divider-w mt-10 mb-20">
+                
+              <% Category.all.each do |category| %>
                 <h5 class="font-alt"><span class="icon-strategy"></span>
                   <!-- カテゴリー名 -->
                     
@@ -73,40 +67,36 @@
                   <div class="progress-bar pb-dark" aria-valuenow="<%= @categoriesSum[category.id] %>" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
                   <!--categoryの個数ほど繰り返します。category_valを使って値を取り出します。　-->
                 </div>
-<% end %>
+              <% end %>
+              
+                <!-- 空白の時間を表示する -->
                 <h5 class="font-alt"><span class="icon-strategy"></span>NOTHING
-                  <!-- カテゴリー名 -->
                 </h5>
                 <div class="progress">
                   <div class="progress-bar pb-dark" aria-valuenow="<%= @caluculate_empty %>" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
                 </div>  
+                <!-- 空白の時間を表示する -->
                 
-                <h3 class="font-alt mb-0" id="useless_title">無駄な時間</h4>
-                <hr class="divider-w mt-10 mb-20">
+              <h3 class="font-alt mb-0" id="period_title">カテゴリー別推移</h4>
+              <hr class="divider-w mt-10 mb-20">
                 
-                <div class="progress">
-                  <div class="progress-bar pb-dark" aria-valuenow="<%= @sum_useless %>" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
-                </div> 
-                
-                <h3 class="font-alt mb-0" id="period_title">期間別時間</h4>
-                <hr class="divider-w mt-10 mb-20">
-<!-- 期間別集計をカテゴリーごとに表示する。-->
-<% Category.all.each do |category| %>
-  <% @eventDate.each do |key, value| %>
-    <% if key == category.id %>
-                <h3 class="font-alt"><span class="icon-tools-2"></span> <%= category.category_val %>
-                </h3>
-      <% value.each do |k, v| %>
-                <h5 class="font-alt font-left"><span class="icon-tools-2"></span> <%= k %>
-                </h5>
-                <div class="progress">
-                  <div class="progress-bar" aria-valuenow="<%= v %>" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
-                </div>
-      <% end %>
-    <% end %>
- <% end %>  
-<% end %>    
-<!-- 期間別集計をカテゴリーごとに表示する。-->
+              <!-- 期間別集計をカテゴリーごとに表示する。-->
+              <% Category.all.each do |category| %>
+                <% @eventDate.each do |key, value| %>
+                  <% if key == category.id %>
+                      <h3 class="font-alt"><span class="icon-tools-2"></span> <%= category.category_val %>
+                      </h3>
+                    <% value.each do |k, v| %>
+                      <h5 class="font-alt font-left"><span class="icon-tools-2"></span> <%= k %>
+                      </h5>
+                      <div class="progress">
+                        <div class="progress-bar" aria-valuenow="<%= v %>" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="font-alt"></span></div>
+                      </div>
+                    <% end %>
+                  <% end %>
+               <% end %>  
+              <% end %>    
+              <!-- 期間別集計をカテゴリーごとに表示する。-->
               </div>
             </div>
           </div>

@@ -30,15 +30,17 @@
 //= require data-confirm-modal
 
 $('.modal-footer').on('click', '#eventDelete', function() {
-        // var eventId = document.getElementById("event_id").value;
+    // deleteボタンをクリックした際の処理
+    
+        var eventId = document.getElementById("event_id").value;
         console.log("Delete Button clicked");
-        // $.ajax({
-            // url: "/main_page/delete",
-            // type: "GET",
-            // data: {
-            //     id: eventId
-            // },
-            // success: function(data) {
+        $.ajax({
+            url: "/main_page/delete",
+            type: "GET",
+            data: {
+                id: eventId
+            },
+            success: function(data) {
                 $("#newEventAndDateModal").modal("hide");
                 var event = $.ajax("/events.json");
                 console.log(event);
@@ -46,33 +48,20 @@ $('.modal-footer').on('click', '#eventDelete', function() {
                //新しいデータをもらって
                $("#calendar").fullCalendar("refetchEvents");
                //カレンダーを更新します。
-            // },
-            // error: function(data) {
-            // }  
-        // });
+            },
+            error: function(data) {
+            }  
+        });
     });
     
-    $('.modal-footer').on('click', '#eventCancel', function() {
-        
-        console.log("キャンセル処理★★");    
-        // alert("success");
-        $("#newEventAndDateModal").modal("hide");
-         var event = $.ajax("/events.json");
-         $("#calendar").fullCalendar("renderEvents", event, true );
-         //新しいデータをもらって
-         $("#calendar").fullCalendar("refetchEvents");    
-         console.log("キャンセル処理★★");    
-        
-    });
-
-    $('#newEventAndDateModal').on('hidden.bs.modal', function () {
-        // モダールを閉じた際の処理
-        
-         var event = $.ajax("/events.json");
-         // 新しいデータをらって再表示
-         $("#calendar").fullCalendar("renderEvents", event, true );
-         $("#calendar").fullCalendar("refetchEvents");    
-    });
+$('#newEventAndDateModal').on('hidden.bs.modal', function () {
+    // モダールを閉じた際の処理
+    
+     var event = $.ajax("/events.json");
+     // 新しいデータをらって再表示
+     $("#calendar").fullCalendar("renderEvents", event, true );
+     $("#calendar").fullCalendar("refetchEvents");    
+});
 
 $('#calendar').fullCalendar({
   //ヘッダーの設定
@@ -94,14 +83,14 @@ $('#calendar').fullCalendar({
     eventStartEditable: false,
     eventOverlap: false,　//登録されているイベントとイベントでの重複禁止
     selectOverlap: false, //新しいイベントの登録の重複禁止 
-//空いている空間に洗濯して追加する処理
+    
+//空いている空間に選択して追加する処理
     select: function(start, end) {
     	$('#calendar').fullCalendar('getView').start;
 		$('#calendar').fullCalendar('getView').end;
     	//$('#newEventAndDateModal').modal('show');//narukiyo delete
     	
-// narukiyo add start	
-// カレンダー内の枠をクリックしたときにmain_page_showのアクションをたたく
+// にmain_page_showのアクションをたたく
     	 $.ajax({
             url: "/main_page/show",
             type: "GET",
@@ -131,11 +120,12 @@ $('#calendar').fullCalendar({
             }  
     	 });
     },
+    
+    
 //存在するイベントを選択して修正する処理
     eventClick: function(event) { //イベントをクリックしたときに実行
             
-// narukiyo add start    
-// カレンダー内のイベントをクリックしたときにmain_page_showのアクションをたたく
+// main_page_showのアクションをたたく
         $.ajax({
             url: "/main_page/show",
             type: "GET",
@@ -144,10 +134,8 @@ $('#calendar').fullCalendar({
                 id:event.id
             },
             success: function(data) {
-                //.format()はdate.format.jsから読んでいます。ネットで拾いました。
-                //ただ処理が少しおかしいかなと。
                 console.log("data.start");
-                console.log(data.start) //dataはちゃんとサーバーから取得している。Chromeで確認済み
+                console.log(data.start);
                 var dateStart = data.start;
                 dateStart = dateStart.split("T");
                 var dateEnd = data.end;
@@ -164,16 +152,14 @@ $('#calendar').fullCalendar({
                 $("#event_id").val(data.id)
                 $("#eventDelete").remove();
                 $(".modal-footer").append("<button id='eventDelete' class='btn btn-danger'>Delete</button>");
-                $('#newEventAndDateModal').modal('show');//ここ��再度開きなおしてもうまくいかない
-                 
-                //window.location.href = '/main_page/show';//同上
-                // alert("sのselectorで値を設定します。
+                $('#newEventAndDateModal').modal('show');
             },
             error: function(data) {
                 alert("errror");
             }            
         });    	
 	   },
+	   
 //Dragした際の処理	   
    eventResize: function(event) {
         console.log("eventDrop");
@@ -185,10 +171,8 @@ $('#calendar').fullCalendar({
                 id:event.id
             },
             success: function(data) {
-                //.format()はdate.format.jsから読んでいます。ネットで拾いました。
-                //ただ処理が少しおかしいかなと。
                 console.log("data.start");
-                console.log(data.start); //dataはちゃんとサーバーから取得している。Chromeで確認済み
+                console.log(data.start); 
                 var dateStart = data.start;
                 dateStart = dateStart.split("T");
                 var dateEnd = data.end;
@@ -214,35 +198,4 @@ $('#calendar').fullCalendar({
         }); 
             }
 });
-
-$('#calendar').fullCalendar({
-    // タイムスロットを選択したとき
-    select: function (startDate, endDate, jsEvent, view) {
-        if(is_double(startDate, endDate, '')) {
-            alert('ダブルブッキング！');
-            $('#calendar').fullCalendar('unselect');
-        }
-    },
-    // イベントアイテムを移動したとき
-    eventDrop: function (event, delta, revertFunc) {
-        if(is_double(event.start, event.end, event._id)) {
-            alert('ダブルブッキング！');
-            revertFunc();
-        }
-    }
-});
-function is_double(new_start, new_end, new_id){
-    var events = $('#calendar').fullCalendar('clientEvents',function (event) {
-        return ((event.start <= new_end && event.end >= new_end)
-            || (event.start <= new_start && event.end >= new_start)
-            || (event.start >= new_start && event.start <= new_end )) &&  event._id != new_id;
-    });
- 
-    if (events.length > 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 

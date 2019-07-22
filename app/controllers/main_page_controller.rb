@@ -11,15 +11,6 @@ class MainPageController < ApplicationController
       end
   end
   
-  def cancel
-    #render action: :show #★レンダリングにするとmain_page_showの54行目でエラーになってしまう
-    #createと同様に記載すれば同様に動くかと思ったけど再表示になってしまう。これなら普通に_eventModalでredirect_toしたら良いかも
-    #エラーメッセージがモーダルに出力されたままcancelボタンを押すと、メインページのエラーが表示されてしまう。
-      respond_to do |format|
-        format.html { redirect_to '/main_page/show'}
-        format.js { @status = "canceled" }
-      end    
-  end
   def edit
      @event = Event.find_by(id: params[:id])
      logger.debug("Edit Debug event !!!!!!!!!!1")
@@ -146,15 +137,6 @@ class MainPageController < ApplicationController
             @status = "fail" }
           end
         end
-      #event = Event.new #Create Event Object
-      #logger.debug(event) 
-      #event.time_from = time_f  #insert datetime
-      #event.time_to = time_t  #insert datetime
-      #logger.debug(event.inspect) #how to debug
-      #event.content = params[:event][:content]
-      #event.category_id = params[:event][:category_id]
-      #event.useless_flag = params[:event][:useless_flag]
-      #logger.debug(event.inspect) #how to debug-->
     end
   end
 

@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   post 'result/show'
   get 'main_page/create'
   get 'main_page/show'
-  post 'main_page/cancel'
   post 'main_page/create'
   get 'main_page/update', to: 'main_page#update'
   get 'main_page/edit'
