@@ -1,9 +1,9 @@
 # PJ TimeTable
 
 
-
-<img align="right" width="500" height="300" src="app/assets/images/pjTimeTable.png">
-
+<p align="center">
+  <img width="500" height="300" src="app/assets/images/pjTimeTable.png">
+</p>
 
 
 
