@@ -1,5 +1,9 @@
 # PJ TimeTable
 
+[![GitHub issues](https://img.shields.io/github/issues/Yoodahun/PJ-TimeTable)](https://github.com/Yoodahun/PJ-TimeTable/issues)
+[![GitHub license](https://img.shields.io/github/license/Yoodahun/PJ-TimeTable?style=flat-square)](https://github.com/Yoodahun/PJ-TimeTable/blob/master/LICENSE.txt)
+
+
 
 <p align="center">
   <img width="500" height="300" src="app/assets/images/pjTimeTable.png">
