@@ -47,7 +47,7 @@ Who participated in this project.
 
 - [Narukiyo Kana](https://github.com/kana0228)
 - [Yoo Dahun](https://github.com/Yoodahun)
-- Tanaka Donhyon
+- Tanaka Donhyun
 
 
 
