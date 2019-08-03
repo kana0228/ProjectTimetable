@@ -1,24 +1,56 @@
-# README
+# PJ TimeTable
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
 
-* Ruby version
+<img align="right" width="100" height="100" src="app/assets/images/pjTimeTable.png">
 
-* System dependencies
+あるタスクごとに時間を記録し、計算するWebアプリです。
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+## Getting Started
 
-* How to run the test suite
+`rails db:migrate`
 
-* Services (job queues, cache servers, search engines, etc.)
+- Create Database
 
-* Deployment instructions
+`rails db:seed`
 
-* ...
+- Initialize DB data
+
+`rails s`
+
+- Running local server
+
+
+
+## Contributer
+
+Who participated in this project.
+
+- [Narukiyo Kana](https://github.com/kana0228)
+- [Yoo Dahun](https://github.com/Yoodahun)
+- Tanaka Donhyon
+
+
+
+## Built With
+
+- **Ruby on Rails**
+- **AWS C9**
+- **Backlog** for Documents
+- **Heroku** for Deploy production environment
+- **[FullCalendar](https://fullcalendar.io/)** for Calculate Timetable and schedule
+
+
+
+## Documents
+
+Summarized the sites that referred to during the project and the Knowledge you should know.
+
+**[Click this link](Documents/README.md)**
+
+
+
+
+
