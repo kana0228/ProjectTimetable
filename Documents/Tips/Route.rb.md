@@ -84,5 +84,8 @@ WEBの基本？ルールに従って正しい実装ができるようにする�
 
 参考資料
 [Railsを支える基本概念の整理（RESTfulやリソースなど） - Qiita](https://qiita.com/kidach1/items/43e53811c12351915278)
- [https://railstutorial.jp/chapters/a-demo-app?version=4.0#sec-a_user_tour](https://railstutorial.jp/chapters/a-demo-app?version=4.0#sec-a_user_tour) 
+
+ [https://railstutorial.jp/chapters/a-demo-app?version=4.0#sec-a_user_tour](https://railstutorial.jp/chapters/a-demo-app?version=4.0#sec-a_user_tour)
+
+ 
 

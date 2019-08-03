@@ -6,7 +6,7 @@ formタグのRailsの実装では、三つぐらいの方法があります。
 -  form_for : 受信先（だいたいモデル）が決まっている。
 - form_with : 最新の文法(Rails 5.1) 上記の二つの表現をまとめて使える。
   			form_withに関しての説明は下記を資料を参考してください。
-  			[【Rails 5】(新) form_with と (旧) form_tag, form_for の違い - Qiita](https://qiita.com/hmmrjn/items/24f3b8eade206ace17e2)
+    			[【Rails 5】(新) form_with と (旧) form_tag, form_for の違い - Qiita](https://qiita.com/hmmrjn/items/24f3b8eade206ace17e2)
 
 #### Form_tag
 ```ruby
@@ -164,8 +164,15 @@ end
 
 参考資料
 [【Rails 5】(新) form_with と (旧) form_tag, form_for の違い - Qiita](https://qiita.com/hmmrjn/items/24f3b8eade206ace17e2)
+
 [Rails4においての form_for 最低限の使い方まとめ - Qiita](https://qiita.com/Momozono/items/319bc503e6a5f0963ab9)
+
 [ruby on rails - Saving Date and Time from Form - Stack Overflow](https://stackoverflow.com/questions/42602635/saving-date-and-time-from-form)
- [https://rails-study.net/form_for/](https://rails-study.net/form_for/) 
+
+ [https://rails-study.net/form_for/](https://rails-study.net/form_for/)
+
+
+
+
 
 

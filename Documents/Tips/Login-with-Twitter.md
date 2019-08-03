@@ -102,5 +102,8 @@ sessionで、nicknameを持っていたら、出力するソースです。こ�
 
 参考資料
 [Ruby on Rails: twitterでユーザー認証 - Qiita](https://qiita.com/keiya01/items/c96a0393c76f5560ee41)
+
 [Ruby on RailsでTwitter認証機能を実装してみる - Reasonable Code](https://reasonable-code.com/rails-twitter-auth/)
+
+
 
